@@ -12,10 +12,17 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.json.JsonArray;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+
+
 
 /**
  *
@@ -40,7 +47,14 @@ public class PasarIva extends HttpServlet {
         Double v2=Double.parseDouble(request.getParameter("val2"));
         Double total=0.0;
         total=v1+v2;
-        response.sendRedirect("http://localhost:8080/CalculoIva/webresources/Iva/calcular/"+total);
+        String v;
+        //response.sendRedirect("http://localhost:8080/CalculoIva/webresources/Iva/calcular/"+total);
+        
+        Client client = ClientBuilder.newClient();
+WebTarget target = client.target("http://localhost:8080/CalculoIva/webresources/Iva/calcular/"+total);
+JsonArray response1 = target.request(MediaType.APPLICATION_JSON).get(JsonArray.class);
+
+        System.out.println(response1);
        
 
 	}

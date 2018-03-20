@@ -46,7 +46,7 @@ public class IvaResource {
         resultado=v*0.19;
         total=v+resultado;
         //throw new UnsupportedOperationException();
-        return "{iva-mensaje:"+total+"}";
+        return "{iva:"+total+"}";
     }
 
     /**
